@@ -9,11 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AccountViewDTO {
-    
+public class ProfileDTO {
+
     private Long id;
-
     private String email;
-
-    private String authorties;
+    private String authorities;
 }

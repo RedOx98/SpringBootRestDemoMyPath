@@ -90,13 +90,17 @@ public class SecurityConfig {
         .authorizeHttpRequests(
             authorizeRequests ->
             authorizeRequests
-            .requestMatchers("/token").permitAll()
-            .requestMatchers("/**").permitAll()
+            .requestMatchers("/").permitAll()
+            .requestMatchers("/api/v1/auth/token").permitAll()
+            .requestMatchers("/api/v1/auth/users/add").permitAll()
+            .requestMatchers("/api/v1/auth/users").hasAuthority("SCOPE_ADMIN")
+            .requestMatchers("/api/v1/auth/users/{userId}/update-authorities").hasAuthority("SCOPE_ADMIN")
+            .requestMatchers("/api/v1/auth/profile").authenticated()
+            .requestMatchers("/api/v1/auth/profile/delete").authenticated()
+            .requestMatchers("/api/v1/api/**").permitAll()
+            .requestMatchers("/api/v1/auth/profile/update-password").permitAll()
             .requestMatchers("/swagger-ui/**").permitAll()
-            .requestMatchers("/api/**").permitAll()
-            .requestMatchers("/db/console/**").permitAll()
             .requestMatchers("/v3/api-docs/**").permitAll()
-            .requestMatchers("/test").authenticated()
 
         )
         .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
