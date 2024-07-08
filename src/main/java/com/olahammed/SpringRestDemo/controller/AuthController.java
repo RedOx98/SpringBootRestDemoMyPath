@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,6 +38,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -46,17 +46,17 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api/v1/auth")
 @Slf4j
 @Tag(name = "Auth Controller", description = "Controller for Account management")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private TokenService tokenService;
 
-    @Autowired
-    private AccountService accountService;
+    private final TokenService tokenService;
 
+    
+    private final AccountService accountService;
     
     
     @PostMapping("/token")
