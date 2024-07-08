@@ -2788,3 +2788,358 @@ Caused by: java.sql.SQLSyntaxErrorException: Table 'albumsdb.photo' doesn't exis
 2024-07-08 21:49:54,531 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-1] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
 2024-07-08 21:49:54,536 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-1] select a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name from album a1_0 join account a2_0 on a2_0.id=a1_0.account_id where a1_0.id=?
 2024-07-08 21:49:54,546 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-1] select p1_0.id,a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name,p1_0.description,p1_0.file_name,p1_0.name,p1_0.original_file_name from photo p1_0 join album a1_0 on a1_0.id=p1_0.album_id left join account a2_0 on a2_0.id=a1_0.account_id where p1_0.id=?
+2024-07-08 22:02:49,584 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-08 22:02:49,587 [INFO] org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2024-07-08 22:02:49,589 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02
+2024-07-08 22:02:49,611 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx
+2024-07-08 22:02:49,666 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists account
+2024-07-08 22:02:49,686 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists account_seq
+2024-07-08 22:02:49,700 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists album
+2024-07-08 22:02:49,709 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists album_seq
+2024-07-08 22:02:49,723 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists photo
+2024-07-08 22:02:49,735 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists photo_seq
+2024-07-08 22:02:49,751 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-07-08 22:02:49,772 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-07-08 22:02:51,635 [INFO] com.olahammed.SpringRestDemo.SpringRestDemoApplication [main] Starting SpringRestDemoApplication using Java 17.0.11 with PID 16821 (/Users/olaidehammed/Downloads/SpringRestDemo/target/classes started by olaidehammed in /Users/olaidehammed/Downloads/SpringRestDemo)
+2024-07-08 22:02:51,637 [INFO] com.olahammed.SpringRestDemo.SpringRestDemoApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-07-08 22:02:59,256 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-08 22:02:59,500 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 228 ms. Found 3 JPA repository interfaces.
+2024-07-08 22:03:05,997 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2024-07-08 22:03:06,015 [INFO] org.apache.catalina.core.StandardService [main] Starting service [Tomcat]
+2024-07-08 22:03:06,017 [INFO] org.apache.catalina.core.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.4]
+2024-07-08 22:03:06,249 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [main] Initializing Spring embedded WebApplicationContext
+2024-07-08 22:03:06,250 [INFO] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 14501 ms
+2024-07-08 22:03:06,528 [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-08 22:03:06,604 [INFO] org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.1.6.Final
+2024-07-08 22:03:06,903 [WARN] org.hibernate.orm.deprecation [main] HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2024-07-08 22:03:07,160 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2024-07-08 22:03:07,517 [INFO] com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5ce3409b
+2024-07-08 22:03:07,520 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-07-08 22:03:07,590 [INFO] SQL dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2024-07-08 22:03:15,519 [DEBUG] org.hibernate.SQL [main] alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02
+2024-07-08 22:03:15,539 [WARN] org.hibernate.tool.schema.internal.ExceptionHandlerLoggedImpl [main] GenerationTarget encountered exception accepting command : Error executing DDL "alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02" via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:419)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:403)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:373)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:256)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:178)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:149)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:242)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:336)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1425)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1130)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:905)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.olahammed.SpringRestDemo.SpringRestDemoApplication.main(SpringRestDemoApplication.java:14)
+Caused by: java.sql.SQLSyntaxErrorException: Table 'albumsdb.album' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 37 common frames omitted
+2024-07-08 22:03:15,546 [DEBUG] org.hibernate.SQL [main] alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx
+2024-07-08 22:03:15,549 [WARN] org.hibernate.tool.schema.internal.ExceptionHandlerLoggedImpl [main] GenerationTarget encountered exception accepting command : Error executing DDL "alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx" via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:419)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:403)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:373)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:256)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:178)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:149)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:242)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:336)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1425)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1130)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:905)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.olahammed.SpringRestDemo.SpringRestDemoApplication.main(SpringRestDemoApplication.java:14)
+Caused by: java.sql.SQLSyntaxErrorException: Table 'albumsdb.photo' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 37 common frames omitted
+2024-07-08 22:03:15,553 [DEBUG] org.hibernate.SQL [main] drop table if exists account
+2024-07-08 22:03:15,569 [DEBUG] org.hibernate.SQL [main] drop table if exists account_seq
+2024-07-08 22:03:15,572 [DEBUG] org.hibernate.SQL [main] drop table if exists album
+2024-07-08 22:03:15,578 [DEBUG] org.hibernate.SQL [main] drop table if exists album_seq
+2024-07-08 22:03:15,582 [DEBUG] org.hibernate.SQL [main] drop table if exists photo
+2024-07-08 22:03:15,586 [DEBUG] org.hibernate.SQL [main] drop table if exists photo_seq
+2024-07-08 22:03:15,595 [DEBUG] org.hibernate.SQL [main] create table account (id bigint not null, authorities varchar(255), email varchar(255), password varchar(255), primary key (id)) engine=InnoDB
+2024-07-08 22:03:15,613 [DEBUG] org.hibernate.SQL [main] create table account_seq (next_val bigint) engine=InnoDB
+2024-07-08 22:03:15,627 [DEBUG] org.hibernate.SQL [main] insert into account_seq values ( 1 )
+2024-07-08 22:03:15,630 [DEBUG] org.hibernate.SQL [main] create table album (id bigint not null, description varchar(255), name varchar(255), account_id bigint not null, primary key (id)) engine=InnoDB
+2024-07-08 22:03:15,642 [DEBUG] org.hibernate.SQL [main] create table album_seq (next_val bigint) engine=InnoDB
+2024-07-08 22:03:15,654 [DEBUG] org.hibernate.SQL [main] insert into album_seq values ( 1 )
+2024-07-08 22:03:15,659 [DEBUG] org.hibernate.SQL [main] create table photo (id bigint not null, description varchar(255), file_name varchar(255), name varchar(255), original_file_name varchar(255), album_id bigint not null, primary key (id)) engine=InnoDB
+2024-07-08 22:03:15,672 [DEBUG] org.hibernate.SQL [main] create table photo_seq (next_val bigint) engine=InnoDB
+2024-07-08 22:03:15,682 [DEBUG] org.hibernate.SQL [main] insert into photo_seq values ( 1 )
+2024-07-08 22:03:15,686 [DEBUG] org.hibernate.SQL [main] alter table account add constraint UK_q0uja26qgu1atulenwup9rxyr unique (email)
+2024-07-08 22:03:15,699 [DEBUG] org.hibernate.SQL [main] alter table album add constraint FK5jtlch5qo4kdolwqbfyrf4e02 foreign key (account_id) references account (id)
+2024-07-08 22:03:15,735 [DEBUG] org.hibernate.SQL [main] alter table photo add constraint FKpy64km2p72eoy5rwh31ria0vx foreign key (album_id) references album (id)
+2024-07-08 22:03:15,770 [INFO] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-08 22:03:15,780 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-08 22:03:21,333 [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-08 22:03:22,362 [INFO] org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@103033fe, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@25511895, org.springframework.security.web.context.SecurityContextHolderFilter@6b7a0f18, org.springframework.security.web.header.HeaderWriterFilter@58d4fe33, org.springframework.security.web.authentication.logout.LogoutFilter@6cac0334, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@67683210, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@914ab92, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74d3b331, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@38f569d, org.springframework.security.web.session.SessionManagementFilter@6e53bb4f, org.springframework.security.web.access.ExceptionTranslationFilter@4d24ab25, org.springframework.security.web.access.intercept.AuthorizationFilter@e638553]
+2024-07-08 22:03:22,911 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-08 22:03:22,931 [INFO] com.olahammed.SpringRestDemo.SpringRestDemoApplication [main] Started SpringRestDemoApplication in 31.893 seconds (process running for 32.57)
+2024-07-08 22:03:23,159 [DEBUG] org.hibernate.SQL [main] select next_val as id_val from account_seq for update
+2024-07-08 22:03:23,174 [DEBUG] org.hibernate.SQL [main] update account_seq set next_val= ? where next_val=?
+2024-07-08 22:03:23,211 [DEBUG] org.hibernate.SQL [main] insert into account (authorities, email, password, id) values (?, ?, ?, ?)
+2024-07-08 22:03:23,358 [DEBUG] org.hibernate.SQL [main] select next_val as id_val from account_seq for update
+2024-07-08 22:03:23,359 [DEBUG] org.hibernate.SQL [main] update account_seq set next_val= ? where next_val=?
+2024-07-08 22:03:23,366 [DEBUG] org.hibernate.SQL [main] insert into account (authorities, email, password, id) values (?, ?, ?, ?)
+2024-07-08 22:03:51,894 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-08 22:03:51,895 [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-07-08 22:03:51,896 [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-07-08 22:03:52,848 [INFO] org.springdoc.api.AbstractOpenApiResource [http-nio-8080-exec-8] Init duration for springdoc-openapi is: 646 ms
+2024-07-08 22:04:26,166 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-9] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:05:02,130 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-5] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:05:02,136 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-5] select next_val as id_val from album_seq for update
+2024-07-08 22:05:02,138 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-5] update album_seq set next_val= ? where next_val=?
+2024-07-08 22:05:02,158 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-5] insert into album (account_id, description, name, id) values (?, ?, ?, ?)
+2024-07-08 22:05:12,948 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-4] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:05:12,960 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-4] select a1_0.id,a1_0.account_id,a1_0.description,a1_0.name from album a1_0 where a1_0.account_id=?
+2024-07-08 22:05:44,557 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-07-08 22:05:44,564 [INFO] org.hibernate.tool.schema.internal.SchemaDropperImpl$DelayedDropActionImpl [SpringApplicationShutdownHook] HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2024-07-08 22:05:44,567 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02
+2024-07-08 22:05:44,667 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx
+2024-07-08 22:05:44,748 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists account
+2024-07-08 22:05:44,792 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists account_seq
+2024-07-08 22:05:44,877 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists album
+2024-07-08 22:05:44,914 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists album_seq
+2024-07-08 22:05:44,942 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists photo
+2024-07-08 22:05:45,056 [DEBUG] org.hibernate.SQL [SpringApplicationShutdownHook] drop table if exists photo_seq
+2024-07-08 22:05:45,377 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-07-08 22:05:45,463 [INFO] com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-07-08 22:05:47,564 [INFO] com.olahammed.SpringRestDemo.SpringRestDemoApplication [main] Starting SpringRestDemoApplication using Java 17.0.11 with PID 18774 (/Users/olaidehammed/Downloads/SpringRestDemo/target/classes started by olaidehammed in /Users/olaidehammed/Downloads/SpringRestDemo)
+2024-07-08 22:05:47,567 [INFO] com.olahammed.SpringRestDemo.SpringRestDemoApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-07-08 22:05:48,632 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-07-08 22:05:48,749 [INFO] org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 84 ms. Found 3 JPA repository interfaces.
+2024-07-08 22:05:54,316 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2024-07-08 22:05:54,366 [INFO] org.apache.catalina.core.StandardService [main] Starting service [Tomcat]
+2024-07-08 22:05:54,367 [INFO] org.apache.catalina.core.StandardEngine [main] Starting Servlet engine: [Apache Tomcat/10.1.4]
+2024-07-08 22:05:54,606 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [main] Initializing Spring embedded WebApplicationContext
+2024-07-08 22:05:54,607 [INFO] org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 6948 ms
+2024-07-08 22:05:55,072 [INFO] org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-07-08 22:05:55,171 [INFO] org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.1.6.Final
+2024-07-08 22:05:55,544 [WARN] org.hibernate.orm.deprecation [main] HHH90000021: Encountered deprecated setting [javax.persistence.sharedCache.mode], use [jakarta.persistence.sharedCache.mode] instead
+2024-07-08 22:05:55,815 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2024-07-08 22:05:56,294 [INFO] com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b5c902
+2024-07-08 22:05:56,296 [INFO] com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-07-08 22:05:56,379 [INFO] SQL dialect [main] HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2024-07-08 22:05:57,580 [DEBUG] org.hibernate.SQL [main] alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02
+2024-07-08 22:05:57,600 [WARN] org.hibernate.tool.schema.internal.ExceptionHandlerLoggedImpl [main] GenerationTarget encountered exception accepting command : Error executing DDL "alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02" via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table album drop foreign key FK5jtlch5qo4kdolwqbfyrf4e02" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:419)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:403)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:373)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:256)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:178)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:149)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:242)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:336)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1425)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1130)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:905)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.olahammed.SpringRestDemo.SpringRestDemoApplication.main(SpringRestDemoApplication.java:14)
+Caused by: java.sql.SQLSyntaxErrorException: Table 'albumsdb.album' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 37 common frames omitted
+2024-07-08 22:05:57,610 [DEBUG] org.hibernate.SQL [main] alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx
+2024-07-08 22:05:57,624 [WARN] org.hibernate.tool.schema.internal.ExceptionHandlerLoggedImpl [main] GenerationTarget encountered exception accepting command : Error executing DDL "alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx" via JDBC Statement
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "alter table photo drop foreign key FKpy64km2p72eoy5rwh31ria0vx" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlString(SchemaDropperImpl.java:419)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applySqlStrings(SchemaDropperImpl.java:403)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.applyConstraintDropping(SchemaDropperImpl.java:373)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.dropFromMetadata(SchemaDropperImpl.java:256)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.performDrop(SchemaDropperImpl.java:178)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:149)
+	at org.hibernate.tool.schema.internal.SchemaDropperImpl.doDrop(SchemaDropperImpl.java:117)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:242)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:143)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1421)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:140)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:336)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1425)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1797)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1747)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:521)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1130)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:905)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:730)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:432)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:308)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1302)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1291)
+	at com.olahammed.SpringRestDemo.SpringRestDemoApplication.main(SpringRestDemoApplication.java:14)
+Caused by: java.sql.SQLSyntaxErrorException: Table 'albumsdb.photo' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:763)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:648)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54)
+	... 37 common frames omitted
+2024-07-08 22:05:57,631 [DEBUG] org.hibernate.SQL [main] drop table if exists account
+2024-07-08 22:05:57,640 [DEBUG] org.hibernate.SQL [main] drop table if exists account_seq
+2024-07-08 22:05:57,643 [DEBUG] org.hibernate.SQL [main] drop table if exists album
+2024-07-08 22:05:57,647 [DEBUG] org.hibernate.SQL [main] drop table if exists album_seq
+2024-07-08 22:05:57,651 [DEBUG] org.hibernate.SQL [main] drop table if exists photo
+2024-07-08 22:05:57,655 [DEBUG] org.hibernate.SQL [main] drop table if exists photo_seq
+2024-07-08 22:05:57,679 [DEBUG] org.hibernate.SQL [main] create table account (id bigint not null, authorities varchar(255), email varchar(255), password varchar(255), primary key (id)) engine=InnoDB
+2024-07-08 22:05:57,696 [DEBUG] org.hibernate.SQL [main] create table account_seq (next_val bigint) engine=InnoDB
+2024-07-08 22:05:57,708 [DEBUG] org.hibernate.SQL [main] insert into account_seq values ( 1 )
+2024-07-08 22:05:57,712 [DEBUG] org.hibernate.SQL [main] create table album (id bigint not null, description varchar(255), name varchar(255), account_id bigint not null, primary key (id)) engine=InnoDB
+2024-07-08 22:05:57,724 [DEBUG] org.hibernate.SQL [main] create table album_seq (next_val bigint) engine=InnoDB
+2024-07-08 22:05:57,736 [DEBUG] org.hibernate.SQL [main] insert into album_seq values ( 1 )
+2024-07-08 22:05:57,739 [DEBUG] org.hibernate.SQL [main] create table photo (id bigint not null, description varchar(255), file_name varchar(255), name varchar(255), original_file_name varchar(255), album_id bigint not null, primary key (id)) engine=InnoDB
+2024-07-08 22:05:57,753 [DEBUG] org.hibernate.SQL [main] create table photo_seq (next_val bigint) engine=InnoDB
+2024-07-08 22:05:57,763 [DEBUG] org.hibernate.SQL [main] insert into photo_seq values ( 1 )
+2024-07-08 22:05:57,767 [DEBUG] org.hibernate.SQL [main] alter table account add constraint UK_q0uja26qgu1atulenwup9rxyr unique (email)
+2024-07-08 22:05:57,781 [DEBUG] org.hibernate.SQL [main] alter table album add constraint FK5jtlch5qo4kdolwqbfyrf4e02 foreign key (account_id) references account (id)
+2024-07-08 22:05:57,811 [DEBUG] org.hibernate.SQL [main] alter table photo add constraint FKpy64km2p72eoy5rwh31ria0vx foreign key (album_id) references album (id)
+2024-07-08 22:05:57,843 [INFO] org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2024-07-08 22:05:57,853 [INFO] org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-07-08 22:06:06,118 [WARN] org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-07-08 22:06:06,535 [INFO] org.springframework.security.web.DefaultSecurityFilterChain [main] Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@755a90a6, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5862ab28, org.springframework.security.web.context.SecurityContextHolderFilter@42ea14b8, org.springframework.security.web.header.HeaderWriterFilter@62d21afd, org.springframework.security.web.authentication.logout.LogoutFilter@49bc1f6c, org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter@38f569d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@74d3b331, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@e2696e8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@21202507, org.springframework.security.web.session.SessionManagementFilter@188058fb, org.springframework.security.web.access.ExceptionTranslationFilter@71c74011, org.springframework.security.web.access.intercept.AuthorizationFilter@567baa55]
+2024-07-08 22:06:06,861 [INFO] org.springframework.boot.web.embedded.tomcat.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2024-07-08 22:06:06,877 [INFO] com.olahammed.SpringRestDemo.SpringRestDemoApplication [main] Started SpringRestDemoApplication in 19.863 seconds (process running for 20.581)
+2024-07-08 22:06:07,089 [DEBUG] org.hibernate.SQL [main] select next_val as id_val from account_seq for update
+2024-07-08 22:06:07,101 [DEBUG] org.hibernate.SQL [main] update account_seq set next_val= ? where next_val=?
+2024-07-08 22:06:07,129 [DEBUG] org.hibernate.SQL [main] insert into account (authorities, email, password, id) values (?, ?, ?, ?)
+2024-07-08 22:06:07,319 [DEBUG] org.hibernate.SQL [main] select next_val as id_val from account_seq for update
+2024-07-08 22:06:07,322 [DEBUG] org.hibernate.SQL [main] update account_seq set next_val= ? where next_val=?
+2024-07-08 22:06:07,330 [DEBUG] org.hibernate.SQL [main] insert into account (authorities, email, password, id) values (?, ?, ?, ?)
+2024-07-08 22:06:07,380 [INFO] org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-07-08 22:06:07,380 [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-07-08 22:06:07,382 [INFO] org.springframework.web.servlet.DispatcherServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-07-08 22:06:08,682 [INFO] org.springdoc.api.AbstractOpenApiResource [http-nio-8080-exec-8] Init duration for springdoc-openapi is: 930 ms
+2024-07-08 22:06:25,706 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-9] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:06:59,783 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:06:59,790 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] select next_val as id_val from album_seq for update
+2024-07-08 22:06:59,792 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] update album_seq set next_val= ? where next_val=?
+2024-07-08 22:06:59,798 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] insert into album (account_id, description, name, id) values (?, ?, ?, ?)
+2024-07-08 22:07:10,682 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-4] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:07:10,694 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-4] select a1_0.id,a1_0.account_id,a1_0.description,a1_0.name from album a1_0 where a1_0.account_id=?
+2024-07-08 22:07:46,307 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:07:46,325 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] select a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name from album a1_0 join account a2_0 on a2_0.id=a1_0.account_id where a1_0.id=?
+2024-07-08 22:07:46,340 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] select next_val as id_val from photo_seq for update
+2024-07-08 22:07:46,342 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] update photo_seq set next_val= ? where next_val=?
+2024-07-08 22:07:46,346 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] insert into photo (album_id, description, file_name, name, original_file_name, id) values (?, ?, ?, ?, ?, ?)
+2024-07-08 22:07:47,381 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] select next_val as id_val from photo_seq for update
+2024-07-08 22:07:47,382 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] update photo_seq set next_val= ? where next_val=?
+2024-07-08 22:07:47,386 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-6] insert into photo (album_id, description, file_name, name, original_file_name, id) values (?, ?, ?, ?, ?, ?)
+2024-07-08 22:08:03,932 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-7] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:08:03,937 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-7] select a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name from album a1_0 join account a2_0 on a2_0.id=a1_0.account_id where a1_0.id=?
+2024-07-08 22:08:03,945 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-7] select p1_0.id,a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name,p1_0.description,p1_0.file_name,p1_0.name,p1_0.original_file_name from photo p1_0 join album a1_0 on a1_0.id=p1_0.album_id left join account a2_0 on a2_0.id=a1_0.account_id where p1_0.id=?
+2024-07-08 22:08:43,975 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-9] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:08:43,980 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-9] select a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name from album a1_0 join account a2_0 on a2_0.id=a1_0.account_id where a1_0.id=?
+2024-07-08 22:08:43,985 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-9] select p1_0.id,a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name,p1_0.description,p1_0.file_name,p1_0.name,p1_0.original_file_name from photo p1_0 join album a1_0 on a1_0.id=p1_0.album_id left join account a2_0 on a2_0.id=a1_0.account_id where p1_0.id=?
+2024-07-08 22:09:15,721 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] select a1_0.id,a1_0.authorities,a1_0.email,a1_0.password from account a1_0 where a1_0.email=?
+2024-07-08 22:09:15,727 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] select a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name from album a1_0 join account a2_0 on a2_0.id=a1_0.account_id where a1_0.id=?
+2024-07-08 22:09:15,733 [DEBUG] org.hibernate.SQL [http-nio-8080-exec-10] select p1_0.id,a1_0.id,a2_0.id,a2_0.authorities,a2_0.email,a2_0.password,a1_0.description,a1_0.name,p1_0.description,p1_0.file_name,p1_0.name,p1_0.original_file_name from photo p1_0 join album a1_0 on a1_0.id=p1_0.album_id left join account a2_0 on a2_0.id=a1_0.account_id where p1_0.id=?

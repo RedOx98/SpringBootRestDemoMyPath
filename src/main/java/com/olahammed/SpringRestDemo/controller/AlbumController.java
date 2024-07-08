@@ -193,9 +193,7 @@ public class AlbumController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/albums/{albumId}/{photoId}/download-photo")
-    @SecurityRequirement(name = "olahammed-demo-api")
-    public ResponseEntity<?> downloadPhoto(@PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId, Authentication authentication) {
+    public ResponseEntity<?> downloadFile(Long albumId, Long photoId, String folderName, Authentication authentication){
         String email = authentication.getName();
         Optional<Account> optionalAccount = accountService.findByEmail(email);
         Account account = optionalAccount.get();
@@ -232,6 +230,19 @@ public class AlbumController {
         }else{
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
+    }
+
+    @GetMapping("/albums/{albumId}/{photoId}/download-photo")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<?> downloadPhoto(@PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId, Authentication authentication) {
+        return downloadFile(albumId, photoId, PHOTOS_FOLDER_NAME, authentication);
+    }
+
+    @GetMapping("/albums/{albumId}/{photoId}/download-thumbnail")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<?> downloadThumbnail(@PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId, Authentication authentication) {
+
+        return downloadFile(albumId, photoId, THUMBNAIL_FOLDER_NAME, authentication);
     }
 
 }

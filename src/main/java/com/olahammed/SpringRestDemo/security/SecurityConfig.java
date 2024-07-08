@@ -101,6 +101,7 @@ public class SecurityConfig {
             .requestMatchers("/api/v1/albums").authenticated()
             .requestMatchers("/api/v1/albums/{albumId}/upload-photos").authenticated()
             .requestMatchers("/api/v1/albums/{albumId}/{photoId}/download-photo").permitAll()
+            .requestMatchers("/api/v1/albums/{albumId}/{photoId}/download-thumbnail").permitAll()
             .requestMatchers("/api/v1/api/**").permitAll()
             .requestMatchers("/api/v1/auth/profile/update-password").permitAll()
             .requestMatchers("/swagger-ui/**").permitAll()
