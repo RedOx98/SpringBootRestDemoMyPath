@@ -38,6 +38,7 @@ import com.olahammed.SpringRestDemo.models.Album;
 import com.olahammed.SpringRestDemo.models.Photo;
 import com.olahammed.SpringRestDemo.payload.auth.album.AlbumPayloadDTO;
 import com.olahammed.SpringRestDemo.payload.auth.album.AlbumViewDTO;
+import com.olahammed.SpringRestDemo.payload.auth.album.PhotoDTO;
 import com.olahammed.SpringRestDemo.services.AccountService;
 import com.olahammed.SpringRestDemo.services.AlbumService;
 import com.olahammed.SpringRestDemo.services.PhotoService;
@@ -89,7 +90,7 @@ public class AlbumController {
             Account account = optionalAccount.get();
             album.setAccount(account);
             album = albumService.save(album);
-            AlbumViewDTO albumViewDTO = new AlbumViewDTO(album.getId(), album.getName(), album.getDescription());
+            AlbumViewDTO albumViewDTO = new AlbumViewDTO(album.getId(), album.getName(), album.getDescription(), null);
             return ResponseEntity.ok(albumViewDTO);
         } catch (Exception e) {
             log.debug(AlbumError.ADD_ALBUM_ERROR.toString() + ": " + e.getMessage());
@@ -111,7 +112,15 @@ public class AlbumController {
         Account account = optionaAccount.get();
         List<AlbumViewDTO> albums = new ArrayList<>();
         for (Album album : albumService.findByAccount_id(account.getId())) {
-            albums.add(new AlbumViewDTO(album.getId(), album.getName(), album.getDescription()));
+            
+
+            List<PhotoDTO> photos = new ArrayList<>();
+            for(Photo photo: photoService.findByAlbum_id(album.getId())){
+            String link = "/albums/"+album.getId()+"/"+photo.getId()+"/download-photo";
+            photos.add(new PhotoDTO(photo.getId(), photo.getName(), photo.getDescription(), photo.getFileName(), link));
+
+            }
+            albums.add(new AlbumViewDTO(album.getId(), album.getName(), album.getDescription(), photos));
         }
         return albums;
     }

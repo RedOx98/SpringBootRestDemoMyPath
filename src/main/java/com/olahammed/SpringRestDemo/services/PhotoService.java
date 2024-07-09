@@ -1,5 +1,6 @@
 package com.olahammed.SpringRestDemo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,4 +23,8 @@ public class PhotoService {
     public Optional<Photo> findById(Long id){
         return photoRepository.findById(id);
     }
+
+    public List<Photo> findByAlbum_id(Long id){
+        return photoRepository.findByAlbum_id(id);
+    };
 }
