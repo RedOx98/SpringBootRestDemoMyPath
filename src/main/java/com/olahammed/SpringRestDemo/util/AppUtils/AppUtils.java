@@ -24,11 +24,29 @@ public class AppUtils {
 
     // }
 
+    public static String PATH = "src/main/resources/static/uploads/";
+
     public static String get_photo_upload_path(String fileName, String folderName, long album_id) throws IOException {
-        String path = "src/main/resources/static/uploads/" + album_id + "/" + folderName;
+        String path = PATH + album_id + "/" + folderName;
         Files.createDirectories(Paths.get(path));
         // return new File(path + album_id).getAbsolutePath() + "/" + fileName;
         return new File(path).getAbsolutePath() + "/" + fileName;
+
+    }
+
+    public static boolean delete_photo_from_path(String fileName, String folder_name, long album_id) {
+        try {
+            File f = new File(PATH + album_id + "/" + folder_name + "/"+fileName); // file to be delete
+            if (f.delete()) 
+            {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
 
     }
 

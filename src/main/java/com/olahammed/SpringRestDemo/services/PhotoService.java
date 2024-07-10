@@ -27,4 +27,8 @@ public class PhotoService {
     public List<Photo> findByAlbum_id(Long id){
         return photoRepository.findByAlbum_id(id);
     };
+
+    public void delete(Photo photo){
+        photoRepository.delete(photo);
+    }
 }

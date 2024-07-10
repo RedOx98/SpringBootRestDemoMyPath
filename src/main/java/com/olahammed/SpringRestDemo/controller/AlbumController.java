@@ -22,9 +22,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -39,6 +41,8 @@ import com.olahammed.SpringRestDemo.models.Photo;
 import com.olahammed.SpringRestDemo.payload.auth.album.AlbumPayloadDTO;
 import com.olahammed.SpringRestDemo.payload.auth.album.AlbumViewDTO;
 import com.olahammed.SpringRestDemo.payload.auth.album.PhotoDTO;
+import com.olahammed.SpringRestDemo.payload.auth.album.PhotoPayloadDTO;
+import com.olahammed.SpringRestDemo.payload.auth.album.PhotoViewDTO;
 import com.olahammed.SpringRestDemo.services.AccountService;
 import com.olahammed.SpringRestDemo.services.AlbumService;
 import com.olahammed.SpringRestDemo.services.PhotoService;
@@ -112,12 +116,12 @@ public class AlbumController {
         Account account = optionaAccount.get();
         List<AlbumViewDTO> albums = new ArrayList<>();
         for (Album album : albumService.findByAccount_id(account.getId())) {
-            
 
             List<PhotoDTO> photos = new ArrayList<>();
-            for(Photo photo: photoService.findByAlbum_id(album.getId())){
-            String link = "/albums/"+album.getId()+"/"+photo.getId()+"/download-photo";
-            photos.add(new PhotoDTO(photo.getId(), photo.getName(), photo.getDescription(), photo.getFileName(), link));
+            for (Photo photo : photoService.findByAlbum_id(album.getId())) {
+                String link = "/albums/" + album.getId() + "/" + photo.getId() + "/download-photo";
+                photos.add(new PhotoDTO(photo.getId(), photo.getName(), photo.getDescription(), photo.getFileName(),
+                        link));
 
             }
             albums.add(new AlbumViewDTO(album.getId(), album.getName(), album.getDescription(), photos));
@@ -125,12 +129,44 @@ public class AlbumController {
         return albums;
     }
 
+    @GetMapping(value = "/albums/{albumId}", produces = "application/json")
+    @ApiResponse(responseCode = "200", description = "List of albums")
+    @ApiResponse(responseCode = "401", description = "Token missing")
+    @ApiResponse(responseCode = "403", description = "Token Error")
+    @Operation(summary = "List album by album ID")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<AlbumViewDTO> albumsById(@PathVariable("albumId") Long albumId,
+            Authentication authentication) {
+        String email = authentication.getName();
+        Optional<Account> optionaAccount = accountService.findByEmail(email);
+        Account account = optionaAccount.get();
+        Optional<Album> optionalAlbum = albumService.findById(albumId);
+        Album album;
+        if (optionalAlbum.isPresent()) {
+            album = optionalAlbum.get();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+        if (account.getId() != album.getAccount().getId()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+        }
+        List<PhotoDTO> photos = new ArrayList<>();
+        for (Photo photo : photoService.findByAlbum_id(album.getId())) {
+            String link = "/albums/" + album.getId() + "/" + photo.getId() + "/download-photo";
+            photos.add(new PhotoDTO(photo.getId(), photo.getName(), photo.getDescription(), photo.getFileName(),
+                    link));
+
+        }
+        AlbumViewDTO albumViewDTO = new AlbumViewDTO(album.getId(), album.getName(), album.getDescription(), photos);
+        return ResponseEntity.ok(albumViewDTO);
+    }
+
     @PostMapping(value = "/albums/{albumId}/upload-photos", consumes = "multipart/form-data")
     @Operation(summary = "Upload photo into album")
     @ApiResponse(responseCode = "400", description = "Please check the payload or token")
     @ApiResponse(responseCode = "201", description = "Photos created")
     @SecurityRequirement(name = "olahammed-demo-api")
-    public ResponseEntity<List<HashMap<String, List<String>>>> photos(
+    public ResponseEntity<List<HashMap<String, List<?>>>> photos(
             @RequestPart(required = true) MultipartFile[] files,
             @PathVariable Long albumId, Authentication authentication) {
 
@@ -148,7 +184,7 @@ public class AlbumController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
 
-        List<String> fileNamesWithSuccess = new ArrayList<>();
+        List<PhotoViewDTO> fileNamesWithSuccess = new ArrayList<>();
         List<String> fileNamesWithError = new ArrayList<>();
 
         Arrays.asList(files).stream().forEach(file -> {
@@ -156,7 +192,7 @@ public class AlbumController {
             if (contentType.equals("image/png")
                     || contentType.equals("image/jpg")
                     || contentType.equals("image/jpeg")) {
-                fileNamesWithSuccess.add(file.getOriginalFilename());
+                // fileNamesWithSuccess.add(file.getOriginalFilename());
 
                 int length = 10;
                 boolean useLetters = true;
@@ -177,6 +213,10 @@ public class AlbumController {
                     photo.setAlbum(album);
                     photoService.save(photo);
 
+                    PhotoViewDTO photoViewDTO = new PhotoViewDTO(photo.getId(), photo.getName(),
+                            photo.getDescription());
+                    fileNamesWithSuccess.add(photoViewDTO);
+
                     BufferedImage thumbImg = AppUtils.getThumbnail(file, THUMBNAIL_WIDTH);
                     File thumbnail_location = new File(
                             AppUtils.get_photo_upload_path(final_photo_name, THUMBNAIL_FOLDER_NAME, albumId));
@@ -192,17 +232,162 @@ public class AlbumController {
             }
         });
 
-        HashMap<String, List<String>> result = new HashMap<>();
+        HashMap<String, List<?>> result = new HashMap<>();
         result.put("SUCCESS", fileNamesWithSuccess);
         result.put("ERRORS", fileNamesWithError);
 
-        List<HashMap<String, List<String>>> response = new ArrayList<>();
+        List<HashMap<String, List<?>>> response = new ArrayList<>();
         response.add(result);
 
         return ResponseEntity.ok(response);
     }
 
-    public ResponseEntity<?> downloadFile(Long albumId, Long photoId, String folderName, Authentication authentication){
+    @PutMapping(value = "/albums/{albumId}/update", produces = "application/json", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponse(responseCode = "400", description = "Please add valid name a description")
+    @ApiResponse(responseCode = "204", description = "Album updated")
+    @Operation(summary = "Update an Album")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<AlbumViewDTO> updateAlbum(@Valid @RequestBody AlbumPayloadDTO albumPayloadDTO,
+            @PathVariable("albumId") Long albumId,
+            Authentication authentication) {
+        try {
+
+            String email = authentication.getName();
+            Optional<Account> optionalAccount = accountService.findByEmail(email);
+            Account account = optionalAccount.get();
+
+            Optional<Album> optionalAlbum = albumService.findById(albumId);
+            Album album;
+            if (optionalAlbum.isPresent()) {
+                album = optionalAlbum.get();
+                if (account.getId() != album.getId()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+
+            album.setName(albumPayloadDTO.getName());
+            album.setDescription(albumPayloadDTO.getDescription());
+            album = albumService.save(album);
+
+            List<PhotoDTO> photos = new ArrayList<>();
+            for (Photo photo : photoService.findByAlbum_id(album.getId())) {
+                String link = "/albums/" + album.getId() + "/" + photo.getId() + "/download-photo";
+                photos.add(new PhotoDTO(photo.getId(), photo.getName(), photo.getDescription(), photo.getFileName(),
+                        link));
+
+            }
+            AlbumViewDTO albumViewDTO = new AlbumViewDTO(album.getId(), album.getName(), album.getDescription(),
+                    photos);
+            return ResponseEntity.ok(albumViewDTO);
+        } catch (Exception e) {
+            log.debug(AlbumError.ADD_ALBUM_ERROR.toString() + ": " + e.getMessage());
+            // return new ResponseEntity<AlbumViewDTO>(new AlbumViewDTO(),
+            // HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @DeleteMapping(value = "/albums/{albumId}/photos/{photoId}/delete")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponse(responseCode = "202", description = "Photo delete")
+    @Operation(summary = "Delete a Photo")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<String> deletePhoto(@PathVariable Long albumId, @PathVariable Long photoId,Authentication authentication) {
+        try {
+
+            String email = authentication.getName();
+            Optional<Account> optionalAccount = accountService.findByEmail(email);
+            Account account = optionalAccount.get();
+
+            Optional<Album> optionalAlbum = albumService.findById(albumId);
+            Album album;
+            if (optionalAlbum.isPresent()) {
+                album = optionalAlbum.get();
+                if (account.getId() != album.getAccount().getId()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+
+            Optional<Photo> optionalPhoto = photoService.findById(photoId);
+            if (optionalPhoto.isPresent()) {
+                Photo photo = optionalPhoto.get();
+                if (photo.getAlbum().getId() != albumId) {
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+                }
+
+                AppUtils.delete_photo_from_path(photo.getFileName(), PHOTOS_FOLDER_NAME, albumId);
+                AppUtils.delete_photo_from_path(photo.getFileName(), THUMBNAIL_FOLDER_NAME, albumId);
+                photoService.delete(photo);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+
+            return ResponseEntity.ok("Photo deleted successfully!");
+        } catch (Exception e) {
+            log.debug(AlbumError.ADD_ALBUM_ERROR.toString() + ": " + e.getMessage());
+            // return new ResponseEntity<AlbumViewDTO>(new AlbumViewDTO(),
+            // HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    @PutMapping(value = "/albums/{albumId}/photos/{photoId}/update", produces = "application/json", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponse(responseCode = "400", description = "Please add valid name a description")
+    @ApiResponse(responseCode = "204", description = "Album updated")
+    @Operation(summary = "Update a photo")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<PhotoViewDTO> updatePhoto(@Valid @RequestBody PhotoPayloadDTO photoPayloadDTO,
+            @PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId,
+            Authentication authentication) {
+        try {
+
+            String email = authentication.getName();
+            Optional<Account> optionalAccount = accountService.findByEmail(email);
+            Account account = optionalAccount.get();
+
+            Optional<Album> optionalAlbum = albumService.findById(albumId);
+            Album album;
+            if (optionalAlbum.isPresent()) {
+                album = optionalAlbum.get();
+                if (account.getId() != album.getId()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+
+            Optional<Photo> optionalPhoto = photoService.findById(photoId);
+            if (optionalPhoto.isPresent()) {
+                Photo photo = optionalPhoto.get();
+                if (photo.getAlbum().getId() != albumId) {
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+                }
+                photo.setName(photoPayloadDTO.getName());
+                photo.setDescription(photoPayloadDTO.getDescription());
+                photoService.save(photo);
+                PhotoViewDTO photoViewDTO = new PhotoViewDTO(photo.getId(), photoPayloadDTO.getName(),
+                        photoPayloadDTO.getDescription());
+                return ResponseEntity.ok(photoViewDTO);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+
+        } catch (Exception e) {
+            log.debug(AlbumError.ADD_ALBUM_ERROR.toString() + ": " + e.getMessage());
+            // return new ResponseEntity<AlbumViewDTO>(new AlbumViewDTO(),
+            // HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+    public ResponseEntity<?> downloadFile(Long albumId, Long photoId, String folderName,
+            Authentication authentication) {
         String email = authentication.getName();
         Optional<Account> optionalAccount = accountService.findByEmail(email);
         Account account = optionalAccount.get();
@@ -220,6 +405,9 @@ public class AlbumController {
         Optional<Photo> optionalPhoto = photoService.findById(photoId);
         if (optionalPhoto.isPresent()) {
             Photo photo = optionalPhoto.get();
+            if (photo.getAlbum().getId() != albumId) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+            }
             Resource resource = null;
             try {
                 resource = AppUtils.getFileAsResource(albumId, PHOTOS_FOLDER_NAME, photo.getFileName());
@@ -233,23 +421,25 @@ public class AlbumController {
             String headerValue = "attachment; filename=\"" + photo.getOriginalFileName() + "\"";
 
             return ResponseEntity.ok()
-            .contentType(MediaType.parseMediaType(contentType))
-            .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
-            .body(resource);
-        }else{
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                    .body(resource);
+        } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
     @GetMapping("/albums/{albumId}/{photoId}/download-photo")
     @SecurityRequirement(name = "olahammed-demo-api")
-    public ResponseEntity<?> downloadPhoto(@PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId, Authentication authentication) {
+    public ResponseEntity<?> downloadPhoto(@PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId,
+            Authentication authentication) {
         return downloadFile(albumId, photoId, PHOTOS_FOLDER_NAME, authentication);
     }
 
     @GetMapping("/albums/{albumId}/{photoId}/download-thumbnail")
     @SecurityRequirement(name = "olahammed-demo-api")
-    public ResponseEntity<?> downloadThumbnail(@PathVariable("albumId") Long albumId, @PathVariable("photoId") Long photoId, Authentication authentication) {
+    public ResponseEntity<?> downloadThumbnail(@PathVariable("albumId") Long albumId,
+            @PathVariable("photoId") Long photoId, Authentication authentication) {
 
         return downloadFile(albumId, photoId, THUMBNAIL_FOLDER_NAME, authentication);
     }
