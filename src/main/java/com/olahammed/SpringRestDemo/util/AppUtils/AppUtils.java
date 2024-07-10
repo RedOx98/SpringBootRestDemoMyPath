@@ -50,6 +50,7 @@ public class AppUtils {
 
     }
 
+
     public static BufferedImage getThumbnail(MultipartFile orginalFile, Integer width) throws IOException{  
         BufferedImage thumbImg = null;  
         BufferedImage img = ImageIO.read(orginalFile.getInputStream());  

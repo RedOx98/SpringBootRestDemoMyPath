@@ -336,6 +336,45 @@ public class AlbumController {
         }
     }
 
+    @DeleteMapping(value = "/albums/{albumId}/delete")
+    @ResponseStatus(HttpStatus.CREATED)
+    @ApiResponse(responseCode = "202", description = "Photo delete")
+    @Operation(summary = "Delete an album")
+    @SecurityRequirement(name = "olahammed-demo-api")
+    public ResponseEntity<String> deleteAlbum(@PathVariable Long albumId,Authentication authentication) {
+        try {
+
+            String email = authentication.getName();
+            Optional<Account> optionalAccount = accountService.findByEmail(email);
+            Account account = optionalAccount.get();
+
+            Optional<Album> optionalAlbum = albumService.findById(albumId);
+            Album album;
+            if (optionalAlbum.isPresent()) {
+                album = optionalAlbum.get();
+                if (account.getId() != album.getAccount().getId()) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+                }
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+
+            for (Photo photo:photoService.findByAlbum_id(album.getId())){
+                AppUtils.delete_photo_from_path(photo.getFileName(), PHOTOS_FOLDER_NAME, albumId);
+                AppUtils.delete_photo_from_path(photo.getFileName(), THUMBNAIL_FOLDER_NAME, albumId);
+                photoService.delete(photo);
+            }
+            albumService.deleteAlbum(album);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("deleted successfully!");
+        } catch (Exception e) {
+            log.debug(AlbumError.ADD_ALBUM_ERROR.toString() + ": " + e.getMessage());
+            // return new ResponseEntity<AlbumViewDTO>(new AlbumViewDTO(),
+            // HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
     @PutMapping(value = "/albums/{albumId}/photos/{photoId}/update", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiResponse(responseCode = "400", description = "Please add valid name a description")

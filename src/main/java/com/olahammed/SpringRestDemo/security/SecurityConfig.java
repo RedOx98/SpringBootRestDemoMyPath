@@ -103,6 +103,7 @@ public class SecurityConfig {
             .requestMatchers("/api/v1/albums/{albumId}/update").authenticated()
             .requestMatchers("/api/v1/albums/{albumId}/photos/{photoId}/update").authenticated()
             .requestMatchers("/api/v1/albums/{albumId}/photos/{photoId}/delete").authenticated()
+            .requestMatchers("/api/v1/albums/{albumId}/delete").authenticated()
             .requestMatchers("/api/v1/albums/{albumId}/upload-photos").authenticated()
             .requestMatchers("/api/v1/albums/{albumId}/{photoId}/download-photo").permitAll()
             .requestMatchers("/api/v1/albums/{albumId}/{photoId}/download-thumbnail").permitAll()
