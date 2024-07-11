@@ -28,7 +28,7 @@ public class SeedData implements CommandLineRunner{
         account02.setPassword("password");
         account02.setAuthorities(Authority.ADMIN.toString() + " " + Authority.USER.toString());
         accountService.save(account02);
-        System.out.println(account02.getAuthorities().toString());
+        System.out.println(account02.getAuthorities().toString()); 
     }
     
 }
