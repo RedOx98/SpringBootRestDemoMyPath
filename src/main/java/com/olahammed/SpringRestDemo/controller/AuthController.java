@@ -70,7 +70,6 @@ public class AuthController {
            log.debug(AccountError.TOKEN_GENERATION_ERROR.toString() + ": "+e.getMessage());
            return new ResponseEntity<>(new TokenDTO(null), HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PostMapping(value = "/users/add", produces = "application/json")

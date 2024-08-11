@@ -78,7 +78,7 @@ public class AlbumController {
 
     @PostMapping(value = "/albums/add", produces = "application/json", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    @ApiResponse(responseCode = "400", description = "Please add valid name a description")
+    @ApiResponse(responseCode = "400", description = "Please check token")
     @ApiResponse(responseCode = "201", description = "Account added")
     @Operation(summary = "Add an Album")
     @SecurityRequirement(name = "olahammed-demo-api")
